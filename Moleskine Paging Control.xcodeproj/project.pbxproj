@@ -1,0 +1,567 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B49E4CAD1FEB6E12001F9F57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49E4CAC1FEB6E12001F9F57 /* AppDelegate.swift */; };
+		B49E4CAF1FEB6E12001F9F57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49E4CAE1FEB6E12001F9F57 /* ViewController.swift */; };
+		B49E4CB21FEB6E12001F9F57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B49E4CB01FEB6E12001F9F57 /* Main.storyboard */; };
+		B49E4CB41FEB6E12001F9F57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B49E4CB31FEB6E12001F9F57 /* Assets.xcassets */; };
+		B49E4CB71FEB6E12001F9F57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B49E4CB51FEB6E12001F9F57 /* LaunchScreen.storyboard */; };
+		B49E4CC21FEB6E12001F9F57 /* Moleskine_Paging_ControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49E4CC11FEB6E12001F9F57 /* Moleskine_Paging_ControlTests.swift */; };
+		B49E4CCD1FEB6E12001F9F57 /* Moleskine_Paging_ControlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49E4CCC1FEB6E12001F9F57 /* Moleskine_Paging_ControlUITests.swift */; };
+		B49E4CDB1FEB6F1A001F9F57 /* MagnificationPagingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49E4CDA1FEB6F1A001F9F57 /* MagnificationPagingControl.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B49E4CBE1FEB6E12001F9F57 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B49E4CA11FEB6E12001F9F57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B49E4CA81FEB6E12001F9F57;
+			remoteInfo = "Moleskine Paging Control";
+		};
+		B49E4CC91FEB6E12001F9F57 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B49E4CA11FEB6E12001F9F57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B49E4CA81FEB6E12001F9F57;
+			remoteInfo = "Moleskine Paging Control";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B49E4CA91FEB6E12001F9F57 /* Moleskine Paging Control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Moleskine Paging Control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B49E4CAC1FEB6E12001F9F57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B49E4CAE1FEB6E12001F9F57 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B49E4CB11FEB6E12001F9F57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B49E4CB31FEB6E12001F9F57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B49E4CB61FEB6E12001F9F57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B49E4CB81FEB6E12001F9F57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B49E4CBD1FEB6E12001F9F57 /* Moleskine Paging ControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Moleskine Paging ControlTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B49E4CC11FEB6E12001F9F57 /* Moleskine_Paging_ControlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moleskine_Paging_ControlTests.swift; sourceTree = "<group>"; };
+		B49E4CC31FEB6E12001F9F57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B49E4CC81FEB6E12001F9F57 /* Moleskine Paging ControlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Moleskine Paging ControlUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B49E4CCC1FEB6E12001F9F57 /* Moleskine_Paging_ControlUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moleskine_Paging_ControlUITests.swift; sourceTree = "<group>"; };
+		B49E4CCE1FEB6E12001F9F57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B49E4CDA1FEB6F1A001F9F57 /* MagnificationPagingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagnificationPagingControl.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B49E4CA61FEB6E12001F9F57 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B49E4CBA1FEB6E12001F9F57 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B49E4CC51FEB6E12001F9F57 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B49E4CA01FEB6E12001F9F57 = {
+			isa = PBXGroup;
+			children = (
+				B49E4CAB1FEB6E12001F9F57 /* Moleskine Paging Control */,
+				B49E4CC01FEB6E12001F9F57 /* Moleskine Paging ControlTests */,
+				B49E4CCB1FEB6E12001F9F57 /* Moleskine Paging ControlUITests */,
+				B49E4CAA1FEB6E12001F9F57 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B49E4CAA1FEB6E12001F9F57 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B49E4CA91FEB6E12001F9F57 /* Moleskine Paging Control.app */,
+				B49E4CBD1FEB6E12001F9F57 /* Moleskine Paging ControlTests.xctest */,
+				B49E4CC81FEB6E12001F9F57 /* Moleskine Paging ControlUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B49E4CAB1FEB6E12001F9F57 /* Moleskine Paging Control */ = {
+			isa = PBXGroup;
+			children = (
+				B49E4CAC1FEB6E12001F9F57 /* AppDelegate.swift */,
+				B49E4CAE1FEB6E12001F9F57 /* ViewController.swift */,
+				B49E4CDA1FEB6F1A001F9F57 /* MagnificationPagingControl.swift */,
+				B49E4CB01FEB6E12001F9F57 /* Main.storyboard */,
+				B49E4CB31FEB6E12001F9F57 /* Assets.xcassets */,
+				B49E4CB51FEB6E12001F9F57 /* LaunchScreen.storyboard */,
+				B49E4CB81FEB6E12001F9F57 /* Info.plist */,
+			);
+			path = "Moleskine Paging Control";
+			sourceTree = "<group>";
+		};
+		B49E4CC01FEB6E12001F9F57 /* Moleskine Paging ControlTests */ = {
+			isa = PBXGroup;
+			children = (
+				B49E4CC11FEB6E12001F9F57 /* Moleskine_Paging_ControlTests.swift */,
+				B49E4CC31FEB6E12001F9F57 /* Info.plist */,
+			);
+			path = "Moleskine Paging ControlTests";
+			sourceTree = "<group>";
+		};
+		B49E4CCB1FEB6E12001F9F57 /* Moleskine Paging ControlUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B49E4CCC1FEB6E12001F9F57 /* Moleskine_Paging_ControlUITests.swift */,
+				B49E4CCE1FEB6E12001F9F57 /* Info.plist */,
+			);
+			path = "Moleskine Paging ControlUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B49E4CA81FEB6E12001F9F57 /* Moleskine Paging Control */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B49E4CD11FEB6E12001F9F57 /* Build configuration list for PBXNativeTarget "Moleskine Paging Control" */;
+			buildPhases = (
+				B49E4CA51FEB6E12001F9F57 /* Sources */,
+				B49E4CA61FEB6E12001F9F57 /* Frameworks */,
+				B49E4CA71FEB6E12001F9F57 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Moleskine Paging Control";
+			productName = "Moleskine Paging Control";
+			productReference = B49E4CA91FEB6E12001F9F57 /* Moleskine Paging Control.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B49E4CBC1FEB6E12001F9F57 /* Moleskine Paging ControlTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B49E4CD41FEB6E12001F9F57 /* Build configuration list for PBXNativeTarget "Moleskine Paging ControlTests" */;
+			buildPhases = (
+				B49E4CB91FEB6E12001F9F57 /* Sources */,
+				B49E4CBA1FEB6E12001F9F57 /* Frameworks */,
+				B49E4CBB1FEB6E12001F9F57 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B49E4CBF1FEB6E12001F9F57 /* PBXTargetDependency */,
+			);
+			name = "Moleskine Paging ControlTests";
+			productName = "Moleskine Paging ControlTests";
+			productReference = B49E4CBD1FEB6E12001F9F57 /* Moleskine Paging ControlTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B49E4CC71FEB6E12001F9F57 /* Moleskine Paging ControlUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B49E4CD71FEB6E12001F9F57 /* Build configuration list for PBXNativeTarget "Moleskine Paging ControlUITests" */;
+			buildPhases = (
+				B49E4CC41FEB6E12001F9F57 /* Sources */,
+				B49E4CC51FEB6E12001F9F57 /* Frameworks */,
+				B49E4CC61FEB6E12001F9F57 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B49E4CCA1FEB6E12001F9F57 /* PBXTargetDependency */,
+			);
+			name = "Moleskine Paging ControlUITests";
+			productName = "Moleskine Paging ControlUITests";
+			productReference = B49E4CC81FEB6E12001F9F57 /* Moleskine Paging ControlUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B49E4CA11FEB6E12001F9F57 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Dilraj Devgun";
+				TargetAttributes = {
+					B49E4CA81FEB6E12001F9F57 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					B49E4CBC1FEB6E12001F9F57 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B49E4CA81FEB6E12001F9F57;
+					};
+					B49E4CC71FEB6E12001F9F57 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B49E4CA81FEB6E12001F9F57;
+					};
+				};
+			};
+			buildConfigurationList = B49E4CA41FEB6E12001F9F57 /* Build configuration list for PBXProject "Moleskine Paging Control" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B49E4CA01FEB6E12001F9F57;
+			productRefGroup = B49E4CAA1FEB6E12001F9F57 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B49E4CA81FEB6E12001F9F57 /* Moleskine Paging Control */,
+				B49E4CBC1FEB6E12001F9F57 /* Moleskine Paging ControlTests */,
+				B49E4CC71FEB6E12001F9F57 /* Moleskine Paging ControlUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B49E4CA71FEB6E12001F9F57 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B49E4CB71FEB6E12001F9F57 /* LaunchScreen.storyboard in Resources */,
+				B49E4CB41FEB6E12001F9F57 /* Assets.xcassets in Resources */,
+				B49E4CB21FEB6E12001F9F57 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B49E4CBB1FEB6E12001F9F57 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B49E4CC61FEB6E12001F9F57 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B49E4CA51FEB6E12001F9F57 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B49E4CAF1FEB6E12001F9F57 /* ViewController.swift in Sources */,
+				B49E4CAD1FEB6E12001F9F57 /* AppDelegate.swift in Sources */,
+				B49E4CDB1FEB6F1A001F9F57 /* MagnificationPagingControl.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B49E4CB91FEB6E12001F9F57 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B49E4CC21FEB6E12001F9F57 /* Moleskine_Paging_ControlTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B49E4CC41FEB6E12001F9F57 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B49E4CCD1FEB6E12001F9F57 /* Moleskine_Paging_ControlUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B49E4CBF1FEB6E12001F9F57 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B49E4CA81FEB6E12001F9F57 /* Moleskine Paging Control */;
+			targetProxy = B49E4CBE1FEB6E12001F9F57 /* PBXContainerItemProxy */;
+		};
+		B49E4CCA1FEB6E12001F9F57 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B49E4CA81FEB6E12001F9F57 /* Moleskine Paging Control */;
+			targetProxy = B49E4CC91FEB6E12001F9F57 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B49E4CB01FEB6E12001F9F57 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B49E4CB11FEB6E12001F9F57 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B49E4CB51FEB6E12001F9F57 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B49E4CB61FEB6E12001F9F57 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B49E4CCF1FEB6E12001F9F57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B49E4CD01FEB6E12001F9F57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B49E4CD21FEB6E12001F9F57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y5SA8QZY2L;
+				INFOPLIST_FILE = "Moleskine Paging Control/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "dsd.Moleskine-Paging-Control";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B49E4CD31FEB6E12001F9F57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y5SA8QZY2L;
+				INFOPLIST_FILE = "Moleskine Paging Control/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "dsd.Moleskine-Paging-Control";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B49E4CD51FEB6E12001F9F57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y5SA8QZY2L;
+				INFOPLIST_FILE = "Moleskine Paging ControlTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "dsd.Moleskine-Paging-ControlTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Moleskine Paging Control.app/Moleskine Paging Control";
+			};
+			name = Debug;
+		};
+		B49E4CD61FEB6E12001F9F57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y5SA8QZY2L;
+				INFOPLIST_FILE = "Moleskine Paging ControlTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "dsd.Moleskine-Paging-ControlTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Moleskine Paging Control.app/Moleskine Paging Control";
+			};
+			name = Release;
+		};
+		B49E4CD81FEB6E12001F9F57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y5SA8QZY2L;
+				INFOPLIST_FILE = "Moleskine Paging ControlUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "dsd.Moleskine-Paging-ControlUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Moleskine Paging Control";
+			};
+			name = Debug;
+		};
+		B49E4CD91FEB6E12001F9F57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y5SA8QZY2L;
+				INFOPLIST_FILE = "Moleskine Paging ControlUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "dsd.Moleskine-Paging-ControlUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Moleskine Paging Control";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B49E4CA41FEB6E12001F9F57 /* Build configuration list for PBXProject "Moleskine Paging Control" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B49E4CCF1FEB6E12001F9F57 /* Debug */,
+				B49E4CD01FEB6E12001F9F57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B49E4CD11FEB6E12001F9F57 /* Build configuration list for PBXNativeTarget "Moleskine Paging Control" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B49E4CD21FEB6E12001F9F57 /* Debug */,
+				B49E4CD31FEB6E12001F9F57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B49E4CD41FEB6E12001F9F57 /* Build configuration list for PBXNativeTarget "Moleskine Paging ControlTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B49E4CD51FEB6E12001F9F57 /* Debug */,
+				B49E4CD61FEB6E12001F9F57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B49E4CD71FEB6E12001F9F57 /* Build configuration list for PBXNativeTarget "Moleskine Paging ControlUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B49E4CD81FEB6E12001F9F57 /* Debug */,
+				B49E4CD91FEB6E12001F9F57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B49E4CA11FEB6E12001F9F57 /* Project object */;
+}
