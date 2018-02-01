@@ -74,6 +74,8 @@ protocol MagnificationPagingControlDelegate {
 
 class MagnificationPagingControl: UIView {
     var delegate:MagnificationPagingControlDelegate?
+    var useHaptics = true
+    
     private var currentIndex:Int = -1
     private var numDots:Int = 0
     private var circleDiameter:CGFloat!
@@ -244,7 +246,9 @@ class MagnificationPagingControl: UIView {
         
         // alert the user of an index change if one occurs
         if index != currentIndex {
-            generator?.selectionChanged()
+            if useHaptics {
+                generator?.selectionChanged()
+            }
             currentIndex = index
             if let d = self.delegate {
                 d.pageControlChangedToIndex(index: currentIndex)

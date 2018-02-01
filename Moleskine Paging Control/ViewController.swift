@@ -80,10 +80,10 @@ class ViewController: UIViewController, MagnificationPagingControlDelegate {
         // sets up the control at the centre right side of the screen and sets the currently selected index to 0
         // setting the index is optional, default behaviour is nothing selected
         startWidth = self.view.frame.width*0.1
-        startHeight = self.view.frame.height*0.1
+        startHeight = self.view.frame.height*0.15
         pagingControl = MagnificationPagingControl(frame: CGRect(x: self.view.frame.width - startWidth,
                                                                  y: self.view.frame.height/2 - startHeight/2,
-                                                                 width: startWidth, height: startHeight), numberOfDots:4)
+                                                                 width: startWidth, height: startHeight), numberOfDots:5)
         pagingControl.delegate = self
         pagingControl.setCurrentIndex(index: 0)
         
