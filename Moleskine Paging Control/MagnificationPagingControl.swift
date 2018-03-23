@@ -199,6 +199,10 @@ class MagnificationPagingControl: UIView {
         if index < 0 || index >= self.numDots {
             return
         }
+        // if there was a previously selected index that is different from the current index, we clear the fill
+        if currentIndex != -1 && currentIndex != index {
+            circles[currentIndex].backgroundColor = UIColor.clear
+        }
         self.currentIndex = index
         var colour = UIColor.orange
         if let d = self.delegate {
