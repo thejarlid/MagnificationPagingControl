@@ -33,7 +33,7 @@
 
 import UIKit
 
-protocol MagnificationPagingControlDelegate {
+protocol MagnificationPagingControlDelegate: class {
     /**
      Called when the user first makes contact with the control
      
@@ -73,7 +73,7 @@ protocol MagnificationPagingControlDelegate {
 }
 
 class MagnificationPagingControl: UIView {
-    var delegate:MagnificationPagingControlDelegate?
+    weak var delegate:MagnificationPagingControlDelegate?
     var useHaptics = true
     
     private var currentIndex:Int = -1
@@ -83,6 +83,7 @@ class MagnificationPagingControl: UIView {
     private var circles:[UIView] = []
     private var generator:UISelectionFeedbackGenerator?
     private var originalFrame:CGRect!
+    private var initialSetup:Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -94,18 +95,24 @@ class MagnificationPagingControl: UIView {
         super.init(frame: frame)
         self.numDots = numberOfDots
         self.originalFrame = frame
-        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if !initialSetup {
+            self.setup()
+            initialSetup = true
+        }
     }
     
     private func setup() {
         // sets up size for the circles to fit numDots within the frame
-        circleDiameter = (self.frame.height * 0.5)/CGFloat(numDots)
-        circleSpacing = (self.frame.height * 0.5)/CGFloat(numDots-1)
+        circleDiameter = min((self.frame.height * 0.5)/CGFloat(numDots), 7)
+        circleSpacing = min((self.frame.height * 0.5)/CGFloat(numDots-1), 6.8)
         
         // creates the gesture recognizer used to respond to a user's touch in the control space
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleTouchInContainer(gesture:)))
@@ -116,24 +123,45 @@ class MagnificationPagingControl: UIView {
         setupInitialCircles()
     }
     
+    func reloadColours() {
+        for i in 0..<numDots {
+            var colour = UIColor.orange
+            if let d = self.delegate {
+                colour = d.colourForDotAtIndex(index: i)
+            }
+            circles[i].backgroundColor = colour
+            circles[i].layer.borderColor = colour.cgColor
+        }
+    }
+    
     /**
      Sets up numDots dots within the frame vertically
     */
     private func setupInitialCircles() {
+        let halfFrameHeight = self.frame.height/2
+        let circleStart = halfFrameHeight - ((self.circleDiameter * CGFloat(numDots)) + (CGFloat(numDots-1) * self.circleSpacing))/2
+        
+        // changes the circle heights based on the distance from the dot
+        var runningHeight:CGFloat = circleStart
+        
         // make circles
         for i in 0..<numDots {
-            let frame = CGRect(x: self.frame.width/2 - circleDiameter/2, y: (self.circleDiameter + self.circleSpacing)*CGFloat(i),
-                               width: circleDiameter, height: circleDiameter)
+            let ratio: CGFloat = 1
+            let dimension = circleDiameter * ratio
+            let frame = CGRect(x: self.frame.width/2 - circleDiameter/2, y: runningHeight, width: dimension, height: dimension)
             let circle = UIView(frame: frame)
-            circle.layer.cornerRadius = circleDiameter/2
+            circle.layer.cornerRadius = dimension/2
             
             var colour = UIColor.orange
             if let d = self.delegate {
                 colour = d.colourForDotAtIndex(index: i)
             }
+            if i == currentIndex {
+                circle.backgroundColor = colour
+            }
             circle.layer.borderColor = colour.cgColor
             circle.layer.borderWidth = 2
-            
+            runningHeight += self.circleSpacing + dimension
             self.addSubview(circle)
             circles.append(circle)
         }
@@ -196,20 +224,29 @@ class MagnificationPagingControl: UIView {
      - parameter index: the index to change to
     */
     func setCurrentIndex(index:Int) {
+//        if index < 0 || index >= self.numDots {
+//            return
+//        }
+//        // if there was a previously selected index that is different from the current index, we clear the fill
+//        if currentIndex != -1 && currentIndex != index {
+//            circles[currentIndex].backgroundColor = UIColor.clear
+//        }
+//        self.currentIndex = index
+//        var colour = UIColor.orange
+//        if let d = self.delegate {
+//            colour = d.colourForDotAtIndex(index: index)
+//            d.pageControlChangedToIndex(index: currentIndex)
+//        }
+//        self.circles[index].backgroundColor = colour
+        
         if index < 0 || index >= self.numDots {
             return
         }
-        // if there was a previously selected index that is different from the current index, we clear the fill
-        if currentIndex != -1 && currentIndex != index {
-            circles[currentIndex].backgroundColor = UIColor.clear
+        if let d = self.delegate {
+            d.pageControlChangedToIndex(index: index)
         }
         self.currentIndex = index
-        var colour = UIColor.orange
-        if let d = self.delegate {
-            colour = d.colourForDotAtIndex(index: index)
-            d.pageControlChangedToIndex(index: currentIndex)
-        }
-        self.circles[index].backgroundColor = colour
+        self.resetCircles()
     }
     
     /**
@@ -278,13 +315,21 @@ class MagnificationPagingControl: UIView {
      Resets the circles back to their default position, leaving the currently selected dot filled
     */
     func resetCircles() {
-        var i:Int = 0
-        for circle in circles {
-            let frame = CGRect(x: self.originalFrame.width/2 - circleDiameter/2, y: (self.circleDiameter + self.circleSpacing)*CGFloat(i),
-                               width: circleDiameter, height: circleDiameter)
-            circle.layer.cornerRadius = circleDiameter/2
-            circle.frame = frame
-            i+=1
+        if initialSetup {
+            let halfFrameHeight = self.frame.height/2
+            let circleStart = halfFrameHeight - ((self.circleDiameter * CGFloat(numDots)) + (CGFloat(numDots-1) * self.circleSpacing))/2
+            
+            // changes the circle heights based on the distance from the dot
+            var runningHeight:CGFloat = circleStart
+            for i in 0..<numDots {
+                let ratio: CGFloat = 1
+                let dimension = circleDiameter * ratio
+                let circle = circles[i]
+                let frame = CGRect(x: self.frame.width/2 - dimension/2, y: runningHeight, width: dimension, height: dimension)
+                circle.frame = frame
+                circle.layer.cornerRadius = dimension/2
+                runningHeight += self.circleSpacing + dimension
+            }
         }
     }
 }
