@@ -91,14 +91,14 @@ class MagnificationPagingControl: UIView {
         setup()
     }
     
-    init(frame:CGRect, numberOfDots:Int) {
-        super.init(frame: frame)
+    convenience init(frame:CGRect, numberOfDots:Int) {
+        self.init(frame: frame)
         self.numDots = numberOfDots
-        self.originalFrame = frame
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.originalFrame = self.frame
     }
     
     override func layoutSubviews() {
@@ -111,8 +111,8 @@ class MagnificationPagingControl: UIView {
     
     private func setup() {
         // sets up size for the circles to fit numDots within the frame
-        circleDiameter = min((self.frame.height * 0.5)/CGFloat(numDots), 7)
-        circleSpacing = min((self.frame.height * 0.5)/CGFloat(numDots-1), 6.8)
+        circleDiameter = min((self.originalFrame.height * 0.5)/CGFloat(numDots), 7)
+        circleSpacing = min((self.originalFrame.height * 0.5)/CGFloat(numDots-1), 6.8)
         
         // creates the gesture recognizer used to respond to a user's touch in the control space
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleTouchInContainer(gesture:)))
@@ -138,7 +138,7 @@ class MagnificationPagingControl: UIView {
      Sets up numDots dots within the frame vertically
     */
     private func setupInitialCircles() {
-        let halfFrameHeight = self.frame.height/2
+        let halfFrameHeight = self.originalFrame.height/2
         let circleStart = halfFrameHeight - ((self.circleDiameter * CGFloat(numDots)) + (CGFloat(numDots-1) * self.circleSpacing))/2
         
         // changes the circle heights based on the distance from the dot
@@ -148,7 +148,7 @@ class MagnificationPagingControl: UIView {
         for i in 0..<numDots {
             let ratio: CGFloat = 1
             let dimension = circleDiameter * ratio
-            let frame = CGRect(x: self.frame.width/2 - circleDiameter/2, y: runningHeight, width: dimension, height: dimension)
+            let frame = CGRect(x: self.originalFrame.width/2 - circleDiameter/2, y: runningHeight, width: dimension, height: dimension)
             let circle = UIView(frame: frame)
             circle.layer.cornerRadius = dimension/2
             
@@ -316,7 +316,7 @@ class MagnificationPagingControl: UIView {
     */
     func resetCircles() {
         if initialSetup {
-            let halfFrameHeight = self.frame.height/2
+            let halfFrameHeight = self.originalFrame.height/2
             let circleStart = halfFrameHeight - ((self.circleDiameter * CGFloat(numDots)) + (CGFloat(numDots-1) * self.circleSpacing))/2
             
             // changes the circle heights based on the distance from the dot
