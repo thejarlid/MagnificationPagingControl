@@ -37,19 +37,23 @@ import UIKit
 
 protocol MagnificationPagingControlDataSource: class {
 
-    /// Called when the colour of the dot at an index is needed
+    /// Called when the colour of the indicator at an index is needed
     ///
     /// - Parameter index: the index that the colour is needed for
     /// - returns: the colour for the requested index
-    func colourForDotAtIndex(index:Int) -> UIColor
+    func colourForIndicator(at index:Int) -> UIColor
     
     
-    /// Called when setting up the view at a provided index that the user has
-    /// defined to be of MagnificationPagingControlItemType.icon
+    /// Called when setting up the indicator at the provided index to
+    /// determine if there is an image to be placed on the indicator
+    /// rather than the regular shape
     ///
-    /// - Parameter index: the index that the image is queried for, nil if no speical icon wanted
-    /// - returns: the image to be used for the item at the provided index
-    func indicatorImage(for index:Int) -> UIImage?
+    /// - Parameter index: the index that the image is queried for
+    /// - returns: a tuple of an image and the tint colour to be used when the image
+    /// indicator is marked as selected. If no tint is provided then the regular
+    /// indicator colour is used for both the selected and deselected state. If no
+    /// image is at this index return nil image to be used for the item at the provided index
+    func indicatorImage(for index:Int) -> (UIImage?, UIColor?)
 }
 
 
@@ -85,13 +89,14 @@ class MagnificationPagingControl: UIView {
     weak var delegate:          MagnificationPagingControlDelegate?         // page control's delegate for which to forward notifications to
     weak var dataSource:        MagnificationPagingControlDataSource?       // page control's data source which is used to define how to layout the view
     public var useHaptics:      Bool = true                                 // whether haptics should be used on the page control
-    private var circles:        [MagnificationPagingControlIndicator] = []  // List of indicators ordered by page index
+    private var indicators:     [MagnificationPagingControlIndicator] = []  // List of indicators ordered by page index
     private var generator:      UISelectionFeedbackGenerator?               // feedback generator to proivde haptic feedback on page change
     private var originalFrame:  CGRect!                                     // original frame of this view which is used for how layouts should be
     private var needsSetup:     Bool = false                                // whether the indicators need updating and to be reconstructed
     
+    
     /// the current index that the page control is set to
-    public private(set) var currentPage:   Int = -1 {
+    public private(set) var currentPage:   Int = 0 {
         didSet {
             // do some work
         }
@@ -143,19 +148,13 @@ class MagnificationPagingControl: UIView {
     /// The tint colour for all indicators
     override open var tintColor: UIColor! {
         didSet {
-            tintColors = [UIColor](repeating: tintColor, count: numberOfPages)
+            
         }
     }
     
     
-    /// The tint colour for each indicator if it is wanted that each indicator has a separate colour
-    open var tintColors: [UIColor] = [] {
-        didSet {
-            guard tintColors.count == numberOfPages else {
-                fatalError("The number of tint colors needs to be the same as the number of page")
-            }
-            // setup all indicators with this tint
-        }
+    override var intrinsicContentSize: CGSize {
+        return sizeThatFits(.zero)
     }
     
     
@@ -163,8 +162,14 @@ class MagnificationPagingControl: UIView {
         super.init(frame: frame)
         originalFrame = frame
     }
+    
 
-
+    convenience init(frame:CGRect, numPages:Int) {
+        self.init(frame: frame)
+        numberOfPages = numPages
+    }
+    
+    
     convenience init(frame:CGRect, numPages:Int, dimension:CGFloat) {
         self.init(frame: frame)
         numberOfPages = numPages
@@ -175,6 +180,18 @@ class MagnificationPagingControl: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.originalFrame = self.frame
+    }
+    
+    
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        // if placing indicators vertically short axis is the x axis and long axis is the y axis
+        // if placing indicators horizontally the above is swapped.
+        //
+        // short axis: |-(padding/2)-(dimension)-(padding/2)-|
+        // longaxis: |-(padding/2)-[(dimension)-(padding)-(dimension) x numPages]-(padding/2)-|
+        
+        let sizeAlongAxis = (padding + indicatorDimension) * CGFloat(numberOfPages)
+        return CGSize(width: indicatorDimension + padding, height: sizeAlongAxis)
     }
     
 
@@ -191,13 +208,14 @@ class MagnificationPagingControl: UIView {
         // sets up size for the circles to fit numDots within the frame
 //        circleDiameter = overrideDiameter == nil ? min(max((self.originalFrame.height * 0.5)/CGFloat(numDots), 7), 12) : overrideDiameter
 //        circleSpacing = min((self.originalFrame.height * 0.5)/CGFloat(numDots-1), 6.8)
-//        // creates the gesture recognizer used to respond to a user's touch in the control space
-//        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleTouchInContainer(gesture:)))
-//        gesture.minimumPressDuration = 0
-//        gesture.numberOfTouchesRequired = 1
-//        self.addGestureRecognizer(gesture)
-//
-//        setupInitialCircles()
+        
+        // creates the gesture recognizer used to respond to a user's touch in the control space
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleTouchInContainer(gesture:)))
+        gesture.minimumPressDuration = 0
+        gesture.numberOfTouchesRequired = 1
+        addGestureRecognizer(gesture)
+
+        layoutIndicators()
     }
 //
 //
@@ -215,53 +233,70 @@ class MagnificationPagingControl: UIView {
 //        }
 //    }
 //
-//
-//    /**
-//     Sets up numDots dots within the frame vertically
-//    */
-//    private func setupInitialCircles() {
-//        let halfFrameHeight = self.originalFrame.height/2
-//        let circleStart = halfFrameHeight - ((self.circleDiameter * CGFloat(numDots)) + (CGFloat(numDots-1) * self.circleSpacing))/2
-//
-//        // changes the circle heights based on the distance from the dot
-//        var runningHeight:CGFloat = circleStart
-//
-//        // make circles
-//        for i in 0..<numDots {
-//            let ratio: CGFloat = 1
-//            let dimension = circleDiameter * ratio
-//            let frame = CGRect(x: self.originalFrame.width/2 - circleDiameter/2, y: runningHeight, width: dimension, height: dimension)
-//            let indicatorImage = delegate?.indicatorImage(for: i)
-//            if let img = indicatorImage {
-//                images[i] = img
-//            }
-//            let circle = UIView(frame: frame)
-//            circle.layer.cornerRadius = dimension/2
-//
-//            var colour = UIColor.orange
-//            if let d = self.delegate {
-//                colour = d.colourForDotAtIndex(index: i)
-//            }
-//            if i == currentIndex {
-//                circle.backgroundColor = colour
-//            }
-//            circle.layer.borderColor = colour.cgColor
-//            circle.layer.borderWidth = 1.5
-//            runningHeight += self.circleSpacing + dimension
-//            self.addSubview(circle)
-//            circles.append(circle)
-//        }
-//    }
-//
-//
-//    /**
-//     Responds to a user's touch based on the state that the gesture is currently in.
-//     Alerts the delegate of any notable events they may want to listen to
-//
-//     - parameter gesture: the gesture sending the message
-//    */
-//    @objc
-//    private func handleTouchInContainer(gesture:UIGestureRecognizer) {
+
+    /// Sets up the indicators dots within the frame vertically
+    private func layoutIndicators() {
+        indicators.forEach {
+            $0.removeFromSuperview()
+        }
+        indicators = []
+
+        // changes the circle heights based on the distance from the dot
+        var runningHeight:CGFloat = padding/2
+
+        // make circles
+        for i in 0 ..< numberOfPages {
+            let frame = CGRect(x: padding/2, y: runningHeight, width: indicatorDimension, height: indicatorDimension)
+            let indicatorImageInfo = dataSource?.indicatorImage(for: i)
+            let indicatorColour = dataSource?.colourForIndicator(at: i)
+            
+            let indicator = MagnificationPagingControlIndicator(frame: frame)
+            indicator.image = indicatorImageInfo?.0
+            indicator.tintColor = indicatorColour
+            indicator.selectedImageTintColour = indicatorImageInfo?.1
+            
+            if i == currentPage {
+                indicator.isSelected = true
+            }
+
+            runningHeight += padding + indicatorDimension
+            addSubview(indicator)
+            indicators.append(indicator)
+        }
+        sizeToFit()
+    }
+    
+    //    /**
+    //     Resets the circles back to their default position, leaving the currently selected dot filled
+    //    */
+    //    func resetCircles() {
+    //        if initialSetup {
+    //            let halfFrameHeight = self.originalFrame.height/2
+    //            let circleStart = halfFrameHeight - ((self.circleDiameter * CGFloat(numDots)) + (CGFloat(numDots-1) * self.circleSpacing))/2
+    //
+    //            // changes the circle heights based on the distance from the dot
+    //            var runningHeight:CGFloat = circleStart
+    //            for i in 0..<numDots {
+    //                let ratio: CGFloat = 1
+    //                let dimension = circleDiameter * ratio
+    //                let circle = circles[i]
+    //                let frame = CGRect(x: self.frame.width/2 - dimension/2, y: runningHeight, width: dimension, height: dimension)
+    //                circle.frame = frame
+    //                circle.layer.cornerRadius = dimension/2
+    //                runningHeight += self.circleSpacing + dimension
+    //            }
+    //        }
+    //    }
+
+
+    /**
+     Responds to a user's touch based on the state that the gesture is currently in.
+     Alerts the delegate of any notable events they may want to listen to
+
+     - parameter gesture: the gesture sending the message
+    */
+    @objc
+    private func handleTouchInContainer(gesture:UIGestureRecognizer) {
 //        switch gesture.state {
 //        case .began:
 //            generator = UISelectionFeedbackGenerator()
@@ -300,7 +335,7 @@ class MagnificationPagingControl: UIView {
 //            resetCircles()
 //            print("failed")
 //        }
-//    }
+    }
 //
 //
 //    /**
@@ -320,15 +355,6 @@ class MagnificationPagingControl: UIView {
 //        }
 //        self.currentIndex = index
 //        self.resetCircles()
-//    }
-//
-//
-//    /**
-//     Getter for the current index of the control
-//     - return: the currently selected index in the control, -1 if nothing is selected
-//    */
-//    func getCurrentIndex() -> Int {
-//        return self.currentIndex
 //    }
 //
 //
@@ -386,26 +412,4 @@ class MagnificationPagingControl: UIView {
 //        }
 //    }
 //
-//
-//    /**
-//     Resets the circles back to their default position, leaving the currently selected dot filled
-//    */
-//    func resetCircles() {
-//        if initialSetup {
-//            let halfFrameHeight = self.originalFrame.height/2
-//            let circleStart = halfFrameHeight - ((self.circleDiameter * CGFloat(numDots)) + (CGFloat(numDots-1) * self.circleSpacing))/2
-//
-//            // changes the circle heights based on the distance from the dot
-//            var runningHeight:CGFloat = circleStart
-//            for i in 0..<numDots {
-//                let ratio: CGFloat = 1
-//                let dimension = circleDiameter * ratio
-//                let circle = circles[i]
-//                let frame = CGRect(x: self.frame.width/2 - dimension/2, y: runningHeight, width: dimension, height: dimension)
-//                circle.frame = frame
-//                circle.layer.cornerRadius = dimension/2
-//                runningHeight += self.circleSpacing + dimension
-//            }
-//        }
-//    }
 }

@@ -34,7 +34,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, MagnificationPagingControlDelegate {
+class ViewController: UIViewController, MagnificationPagingControlDelegate, MagnificationPagingControlDataSource {
     
     @IBOutlet weak var indicator: MagnificationPagingControlIndicator!
     var pagingControl:MagnificationPagingControl!
@@ -90,6 +90,10 @@ class ViewController: UIViewController, MagnificationPagingControlDelegate {
 //        pagingControl = MagnificationPagingControl(frame: CGRect(x: self.view.frame.width - startWidth,
 //                                                                 y: self.view.frame.height/2 - startHeight/2,
 //                                                                 width: startWidth, height: startHeight), numberOfDots:5)
+        
+        pagingControl = MagnificationPagingControl(frame: CGRect(origin: CGPoint(x: 30, y: 40), size: .zero), numPages: 4)
+        pagingControl.dataSource = self
+        pagingControl.delegate = self
 //        pagingControl.delegate = self
 //        pagingControl.setCurrentIndex(index: 0)
         
@@ -97,7 +101,7 @@ class ViewController: UIViewController, MagnificationPagingControlDelegate {
         self.view.addSubview(creditLabel)
         self.view.addSubview(colourSwitch)
         self.view.addSubview(label)
-//        self.view.addSubview(pagingControl)
+        self.view.addSubview(pagingControl)
     }
     
     /**
@@ -157,9 +161,15 @@ class ViewController: UIViewController, MagnificationPagingControlDelegate {
     func pageControlChangedToIndex(index: Int) {
         label.text = "\(index)"
     }
+
     
-    func colourForDotAtIndex(index: Int) -> UIColor {
+    func colourForIndicator(at index: Int) -> UIColor {
         return UIColor.orange
+    }
+    
+
+    func indicatorImage(for index: Int) -> (UIImage?, UIColor?) {
+        return (nil, nil)
     }
     
     

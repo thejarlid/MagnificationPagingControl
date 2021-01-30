@@ -41,8 +41,8 @@ public class MagnificationPagingControlIndicator: UIView {
     /// the colour of the image in the indicator when this indicator is selected
     public var selectedImageTintColour: UIColor? {
         didSet {
-            if isSelected {
-                imageView?.tintColor = tintColor
+            if let tint = selectedImageTintColour, isSelected {
+                imageView?.tintColor = tint
             }
         }
     }
