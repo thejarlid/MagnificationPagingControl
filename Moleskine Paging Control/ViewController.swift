@@ -36,6 +36,7 @@ import UIKit
 
 class ViewController: UIViewController, MagnificationPagingControlDelegate {
     
+    @IBOutlet weak var indicator: MagnificationPagingControlIndicator!
     var pagingControl:MagnificationPagingControl!
     var label:UILabel!          // displays the currently selected index of the control
     var startWidth:CGFloat!     // starting width of the control
@@ -46,6 +47,11 @@ class ViewController: UIViewController, MagnificationPagingControlDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        indicator.image = UIImage(named: "inbox")
+        indicator.selectedImageTintColour = .black
+        indicator.tintColor = UIColor.orange
+        indicator.borderWidth = 2
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,17 +87,17 @@ class ViewController: UIViewController, MagnificationPagingControlDelegate {
         // setting the index is optional, default behaviour is nothing selected
         startWidth = self.view.frame.width*0.1
         startHeight = self.view.frame.height*0.15
-        pagingControl = MagnificationPagingControl(frame: CGRect(x: self.view.frame.width - startWidth,
-                                                                 y: self.view.frame.height/2 - startHeight/2,
-                                                                 width: startWidth, height: startHeight), numberOfDots:5)
-        pagingControl.delegate = self
-        pagingControl.setCurrentIndex(index: 0)
+//        pagingControl = MagnificationPagingControl(frame: CGRect(x: self.view.frame.width - startWidth,
+//                                                                 y: self.view.frame.height/2 - startHeight/2,
+//                                                                 width: startWidth, height: startHeight), numberOfDots:5)
+//        pagingControl.delegate = self
+//        pagingControl.setCurrentIndex(index: 0)
         
         // adds all the created views above to the ViewController's main view
         self.view.addSubview(creditLabel)
         self.view.addSubview(colourSwitch)
         self.view.addSubview(label)
-        self.view.addSubview(pagingControl)
+//        self.view.addSubview(pagingControl)
     }
     
     /**
@@ -154,6 +160,17 @@ class ViewController: UIViewController, MagnificationPagingControlDelegate {
     
     func colourForDotAtIndex(index: Int) -> UIColor {
         return UIColor.orange
+    }
+    
+    
+    @IBAction func btnPressed(_ sender: Any) {
+        indicator.frame = CGRect(origin: indicator.frame.origin, size: CGSize(width: 50, height: 50))
+        indicator.isSelected = !indicator.isSelected
+        if indicator.image == nil {
+            indicator.image = UIImage(named: "inbox")
+        } else {
+            indicator.image = nil
+        }
     }
 }
 

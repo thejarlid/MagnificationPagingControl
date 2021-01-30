@@ -88,7 +88,7 @@ class MagnificationPagingControl: UIView {
     private var circles:        [MagnificationPagingControlIndicator] = []  // List of indicators ordered by page index
     private var generator:      UISelectionFeedbackGenerator?               // feedback generator to proivde haptic feedback on page change
     private var originalFrame:  CGRect!                                     // original frame of this view which is used for how layouts should be
-    private var initialSetup:   Bool = false                                // whether the view has been setup
+    private var needsSetup:     Bool = false                                // whether the indicators need updating and to be reconstructed
     
     /// the current index that the page control is set to
     public private(set) var currentPage:   Int = -1 {
@@ -102,6 +102,7 @@ class MagnificationPagingControl: UIView {
     private var numberOfPages:  Int = 0 {
         didSet {
             // do some work and reset control
+            
         }
     }
     
@@ -116,7 +117,7 @@ class MagnificationPagingControl: UIView {
     
     
     /// Padding space between indicators
-    private var padding:  CGFloat! {
+    private var padding:  CGFloat! = 7 {
         didSet {
             
         }
@@ -158,44 +159,36 @@ class MagnificationPagingControl: UIView {
     }
     
     
-//
-//
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        self.originalFrame = frame
-//    }
-//
-//
-//    convenience init(frame:CGRect, numberOfDots:Int) {
-//        self.init(frame: frame)
-//        self.numDots = numberOfDots
-//    }
-//
-//
-//    convenience init(frame:CGRect, numberOfDots:Int, diameter:CGFloat) {
-//        self.init(frame: frame)
-//        self.numDots = numberOfDots
-//        self.overrideDiameter = diameter
-//    }
-//
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        self.originalFrame = self.frame
-//    }
-//
-//
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        if !initialSetup {
-//            self.setup()
-//            initialSetup = true
-//        }
-//    }
-//
-//
-//    private func setup() {
-//        // sets up size for the circles to fit numDots within the frame
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        originalFrame = frame
+    }
+
+
+    convenience init(frame:CGRect, numPages:Int, dimension:CGFloat) {
+        self.init(frame: frame)
+        numberOfPages = numPages
+        indicatorDimension = dimension
+    }
+
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.originalFrame = self.frame
+    }
+    
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if !needsSetup {
+            self.setup()
+            needsSetup = true
+        }
+    }
+
+
+    private func setup() {
+        // sets up size for the circles to fit numDots within the frame
 //        circleDiameter = overrideDiameter == nil ? min(max((self.originalFrame.height * 0.5)/CGFloat(numDots), 7), 12) : overrideDiameter
 //        circleSpacing = min((self.originalFrame.height * 0.5)/CGFloat(numDots-1), 6.8)
 //        // creates the gesture recognizer used to respond to a user's touch in the control space
@@ -205,7 +198,7 @@ class MagnificationPagingControl: UIView {
 //        self.addGestureRecognizer(gesture)
 //
 //        setupInitialCircles()
-//    }
+    }
 //
 //
 //    func reloadColours() {
