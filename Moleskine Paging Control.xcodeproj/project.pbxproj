@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B43EF99C25C298D70093D912 /* MagnificationPagingControlIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43EF99B25C298D70093D912 /* MagnificationPagingControlIndicator.swift */; };
 		B49E4CAD1FEB6E12001F9F57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49E4CAC1FEB6E12001F9F57 /* AppDelegate.swift */; };
 		B49E4CAF1FEB6E12001F9F57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49E4CAE1FEB6E12001F9F57 /* ViewController.swift */; };
 		B49E4CB21FEB6E12001F9F57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B49E4CB01FEB6E12001F9F57 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B43EF99B25C298D70093D912 /* MagnificationPagingControlIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagnificationPagingControlIndicator.swift; sourceTree = "<group>"; };
 		B49E4CA91FEB6E12001F9F57 /* Moleskine Paging Control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Moleskine Paging Control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B49E4CAC1FEB6E12001F9F57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B49E4CAE1FEB6E12001F9F57 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				B49E4CAC1FEB6E12001F9F57 /* AppDelegate.swift */,
 				B49E4CAE1FEB6E12001F9F57 /* ViewController.swift */,
 				B49E4CDA1FEB6F1A001F9F57 /* MagnificationPagingControl.swift */,
+				B43EF99B25C298D70093D912 /* MagnificationPagingControlIndicator.swift */,
 				B49E4CB01FEB6E12001F9F57 /* Main.storyboard */,
 				B49E4CB31FEB6E12001F9F57 /* Assets.xcassets */,
 				B49E4CB51FEB6E12001F9F57 /* LaunchScreen.storyboard */,
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B49E4CAF1FEB6E12001F9F57 /* ViewController.swift in Sources */,
+				B43EF99C25C298D70093D912 /* MagnificationPagingControlIndicator.swift in Sources */,
 				B49E4CAD1FEB6E12001F9F57 /* AppDelegate.swift in Sources */,
 				B49E4CDB1FEB6F1A001F9F57 /* MagnificationPagingControl.swift in Sources */,
 			);
