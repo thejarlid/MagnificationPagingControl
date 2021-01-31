@@ -103,6 +103,7 @@ class MagnificationPagingControl: UIView {
     /// the current index that the page control is set to
     public var currentPage: Int = 0 {
         didSet {
+            guard !needsSetup else { return }
             
             // if user sets current page out of the bounds set the current page back to the old value
             if currentPage < 0 || currentPage > numberOfPages {
