@@ -52,7 +52,12 @@ public class MagnificationPagingControlIndicator: UIView {
     public override var tintColor: UIColor! {
         didSet {
             indicatorView?.layer.borderColor = tintColor.cgColor
-            imageView?.tintColor = tintColor
+            if isSelected {
+                indicatorView?.backgroundColor = tintColor
+                imageView?.tintColor = selectedImageTintColour == nil ? tintColor : selectedImageTintColour
+            } else {
+                imageView?.tintColor = tintColor
+            }
         }
     }
     

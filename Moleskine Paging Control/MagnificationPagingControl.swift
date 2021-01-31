@@ -97,6 +97,7 @@ class MagnificationPagingControl: UIView {
     private var indicators:     [MagnificationPagingControlIndicator] = []  // List of indicators ordered by page index
     private var generator:      UISelectionFeedbackGenerator?               // feedback generator to proivde haptic feedback on page change
     private var needsSetup:     Bool = true                                 // whether the indicators need updating and to be reconstructed
+    private var numberOfPages: Int = 0                                      // the number of pages this paging control should display
     
     
     /// the current index that the page control is set to
@@ -127,20 +128,12 @@ class MagnificationPagingControl: UIView {
     }
     
     
-    /// the number of pages this paging control should display
-    private var numberOfPages: Int = 0 {
-        didSet {
-            // do some work and reset control
-            
-        }
-    }
-    
-    
     /// The dimensions of the indicator frame. Indicators are square and so this
     /// corresponds to both the width and height of an indicator
     private var indicatorDimension: CGFloat = 8 {
         didSet {
-            
+            needsSetup = true
+            layoutSubviews()
         }
     }
     
@@ -148,15 +141,8 @@ class MagnificationPagingControl: UIView {
     /// Padding space between indicators
     private var padding: CGFloat! = 6.8 {
         didSet {
-            
-        }
-    }
-    
-    
-    /// Flag indicating whether the control should hide itself when only one page is active
-    @IBInspectable open var hidesForSinglePage: Bool = false {
-        didSet {
-        
+            needsSetup = true
+            layoutSubviews()
         }
     }
     
@@ -164,7 +150,9 @@ class MagnificationPagingControl: UIView {
     /// The border width of the indicators
     public var indicatorBorderWidth: CGFloat = 2 {
         didSet {
-            
+            for indicator in indicators {
+                indicator.borderWidth = indicatorBorderWidth
+            }
         }
     }
     
@@ -172,7 +160,9 @@ class MagnificationPagingControl: UIView {
     /// The tint colour for all indicators
     override open var tintColor: UIColor! {
         didSet {
-            
+            for indicator in indicators {
+                indicator.tintColor = tintColor
+            }
         }
     }
     
@@ -224,6 +214,30 @@ class MagnificationPagingControl: UIView {
         let shortAxisFrame = controlDirection == .vertical ? frame.width : frame.height
         let sizeAlongShortAxis = max(indicatorDimension + (padding * 2), shortAxisFrame)
         return CGSize(width: sizeAlongShortAxis, height: sizeAlongLongAxis)
+    }
+    
+    
+    /// Manually sets the tint of the indicator at the provided index. If the index is valid
+    ///
+    /// - Parameters:
+    ///   - tint: the tint to set for the index
+    ///   - index: the index of the indicator for which to set
+    public func set(tint: UIColor, forIndicatorAt index:Int) {
+        guard index >= 0 && index < numberOfPages else { return }
+        indicators[index].tintColor = tint
+    }
+    
+    
+    /// Manually sets/removes the image of the indicator with the provided selected tint colour at the given index. If the index is valid.
+    ///
+    /// - Parameters:
+    ///   - image: the image to set on the indicator, if nil is provided the image is removed from the indicator
+    ///   - selectedTint: the tint to place on the indicator for the image in the selected case. If no selected tint is provided the regular tint is used
+    ///   - index: the index of the indicator for which to modify
+    public func set(image: UIImage?, with selectedTint:UIColor?, for index:Int) {
+        guard index >= 0 && index < numberOfPages else { return }
+        indicators[index].image = image
+        indicators[index].selectedImageTintColour = selectedTint
     }
     
 
@@ -298,16 +312,6 @@ class MagnificationPagingControl: UIView {
         sizeToFit()
     }
     
-    
-    public func setTintForIndicator(at index:Int) {
-        
-    }
-    
-    
-    public func setImageForIndicator(at index:Int) {
-        
-    }
-
 
     /**
      Responds to a user's touch based on the state that the gesture is currently in.
