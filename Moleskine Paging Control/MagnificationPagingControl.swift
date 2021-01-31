@@ -101,7 +101,7 @@ class MagnificationPagingControl: UIView {
     
     
     /// the current index that the page control is set to
-    public private(set) var currentPage: Int = 0 {
+    public private(set) var currentPage: Int = 1 {
         didSet {
             
             // if user sets current page out of the bounds set the current page back to the old value

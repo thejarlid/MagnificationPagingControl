@@ -40,6 +40,7 @@ public class MagnificationPagingControlIndicator: UIView {
     /// Whether this indicator should be in the selected state
     public var isSelected: Bool = false {
         didSet {
+            print("here \(isSelected)")
             if isSelected {
                 indicatorView?.backgroundColor = tintColor
                 imageView?.tintColor = selectedImageTintColour != nil ? selectedImageTintColour : tintColor
@@ -142,6 +143,7 @@ public class MagnificationPagingControlIndicator: UIView {
         indicatorView?.layer.cornerRadius = frame.width/2
         indicatorView?.layer.borderWidth = borderWidth
         indicatorView?.layer.borderColor = tintColor.cgColor
+        indicatorView?.backgroundColor = isSelected ? tintColor : .clear
         indicatorView?.translatesAutoresizingMaskIntoConstraints = false
         addSubview(indicatorView!)
         
@@ -167,7 +169,11 @@ public class MagnificationPagingControlIndicator: UIView {
         let newImage = imageView?.image?.withRenderingMode(.alwaysTemplate).withAlignmentRectInsets(UIEdgeInsets(top: 1.5, left: 1.5, bottom: 1.5, right: 1.5))
         imageView?.image = newImage
         imageView?.contentMode = .scaleToFill
-        imageView?.tintColor = tintColor
+        if isSelected && selectedImageTintColour != nil {
+            imageView?.tintColor = selectedImageTintColour
+        } else {
+            imageView?.tintColor = tintColor
+        }
         imageView?.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(imageView!)

@@ -11,11 +11,9 @@ Create the control in Storyboard by dragging a UIView and changing the class or 
 ```Swift
   let startWidth = self.view.frame.width*0.1
   let startHeight = self.view.frame.height*0.1
-  let pagingControl = MagnificationPagingControl(frame: CGRect(x: self.view.frame.width - startWidth,
-                                                           y: self.view.frame.height/2 - startHeight/2,
-                                                           width: startWidth, height: startHeight), numberOfDots:4)
+  let pagingControl = MagnificationPagingControl(frame: CGRect(origin: CGPoint(x: self.view.frame.width - startWidth, y: self.view.frame.height/2 - startHeight/2), size: CGSize(width: startWidth, height: startHeight)), numPages: 4)
   pagingControl.delegate = self
-  pagingControl.setCurrentIndex(index: 0)
+  pagingControl.dataSource = self
 ```
 
 ## Demo 
@@ -30,7 +28,7 @@ Let me know of any issues or improvements that can be made on the control
 
     MIT License
 
-    Copyright (c) 2017 Dilraj Devgun
+    Copyright (c) 2021 Dilraj Devgun
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal

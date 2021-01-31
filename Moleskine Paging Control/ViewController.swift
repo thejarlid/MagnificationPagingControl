@@ -72,7 +72,8 @@ class ViewController: UIViewController, MagnificationPagingControlDelegate, Magn
         // setting the index is optional, default behaviour is nothing selected
         startWidth = self.view.frame.width*0.1
         startHeight = self.view.frame.height*0.15
-        pagingControl = MagnificationPagingControl(frame: CGRect(origin: CGPoint(x: self.view.frame.width - startWidth, y: self.view.frame.height/2 - startHeight/2), size: CGSize(width: startWidth, height: startHeight)), numPages: 4)
+        pagingControl = MagnificationPagingControl(frame: CGRect(origin: CGPoint(x: self.view.frame.width - startWidth, y: self.view.frame.height/2 - startHeight/2),
+                                                                 size: CGSize(width: startWidth, height: startHeight)), numPages: 4)
         pagingControl.dataSource = self
         pagingControl.delegate = self
         
