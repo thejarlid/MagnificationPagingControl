@@ -224,7 +224,7 @@ class MagnificationPagingControl: UIView {
     ///   - tint: the tint to set for the index
     ///   - index: the index of the indicator for which to set
     public func set(tint: UIColor, forIndicatorAt index:Int) {
-        guard index >= 0 && index < numberOfPages else { return }
+        guard index >= 0 && index < numberOfPages && !needsSetup else { return }
         indicators[index].tintColor = tint
     }
     
@@ -236,7 +236,7 @@ class MagnificationPagingControl: UIView {
     ///   - selectedTint: the tint to place on the indicator for the image in the selected case. If no selected tint is provided the regular tint is used
     ///   - index: the index of the indicator for which to modify
     public func set(image: UIImage?, with selectedTint:UIColor?, for index:Int) {
-        guard index >= 0 && index < numberOfPages else { return }
+        guard index >= 0 && index < numberOfPages  && !needsSetup else { return }
         indicators[index].image = image
         indicators[index].selectedImageTintColour = selectedTint
     }
