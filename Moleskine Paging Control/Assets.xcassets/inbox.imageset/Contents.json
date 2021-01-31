@@ -1,12 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "icons8-inbox-30.png",
+      "filename" : "icons8-search-30.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icons8-inbox-60.png",
+      "filename" : "icons8-search-60.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

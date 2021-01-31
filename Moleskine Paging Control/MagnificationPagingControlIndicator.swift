@@ -133,8 +133,9 @@ public class MagnificationPagingControlIndicator: UIView {
         imageView?.removeFromSuperview()
         imageView = UIImageView()
         imageView?.image = image
-        let newImage = imageView?.image?.withRenderingMode(.alwaysTemplate)
+        let newImage = imageView?.image?.withRenderingMode(.alwaysTemplate).withAlignmentRectInsets(UIEdgeInsets(top: 1.5, left: 1.5, bottom: 1.5, right: 1.5))
         imageView?.image = newImage
+        imageView?.contentMode = .scaleToFill
         imageView?.tintColor = tintColor
         imageView?.translatesAutoresizingMaskIntoConstraints = false
         
