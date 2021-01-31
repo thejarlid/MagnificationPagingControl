@@ -40,7 +40,6 @@ public class MagnificationPagingControlIndicator: UIView {
     /// Whether this indicator should be in the selected state
     public var isSelected: Bool = false {
         didSet {
-            print("here \(isSelected)")
             if isSelected {
                 indicatorView?.backgroundColor = tintColor
                 imageView?.tintColor = selectedImageTintColour != nil ? selectedImageTintColour : tintColor

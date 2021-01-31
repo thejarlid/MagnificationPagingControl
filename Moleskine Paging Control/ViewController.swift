@@ -86,6 +86,7 @@ class ViewController: UIViewController, MagnificationPagingControlDelegate, Magn
     
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         let frame = CGRect(x: self.view.frame.width - self.startWidth, y: self.view.frame.height/2 - self.pagingControl.frame.height/2,
                            width: self.pagingControl.frame.width, height: self.pagingControl.frame.height)
         self.pagingControl.frame = frame
