@@ -3,15 +3,15 @@
 //  Moleskine Paging Control
 //
 //  Created by Dilraj Devgun on 12/20/17.
-//  Copyright © 2017 Dilraj Devgun. All rights reserved.
+//  Copyright © 2021 Dilraj Devgun. All rights reserved.
 //
-//  A control that display's a vertical series of dots which the
+//  A control that display's a series of indicators which the
 //  user can then pan over and a magnification and selection effect
 //  is created.
 //
 //  MIT License
 //
-//  Copyright (c) 2017 Dilraj Devgun
+//  Copyright (c) 2021 Dilraj Devgun
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -313,14 +313,11 @@ class MagnificationPagingControl: UIView {
     }
     
 
-    /**
-     Responds to a user's touch based on the state that the gesture is currently in.
-     Alerts the delegate of any notable events they may want to listen to
-
-     - parameter gesture: the gesture sending the message
-    */
-    @objc
-    private func handleTouchInContainer(gesture:UIGestureRecognizer) {
+    /// Responds to a user's touch based on the state that the gesture is currently in.
+    /// Alerts the delegate of any notable events they may want to listen to
+    ///
+    /// - Parameter gesture: the gesture sending the message
+    @objc private func handleTouchInContainer(gesture:UIGestureRecognizer) {
         switch gesture.state {
         case .began:
             generator = UISelectionFeedbackGenerator()

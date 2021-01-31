@@ -36,28 +36,13 @@ import UIKit
 
 class ViewController: UIViewController, MagnificationPagingControlDelegate, MagnificationPagingControlDataSource {
     
-    @IBOutlet weak var indicator: MagnificationPagingControlIndicator!
     var pagingControl:MagnificationPagingControl!
     var label:UILabel!          // displays the currently selected index of the control
     var startWidth:CGFloat!     // starting width of the control
     var startHeight:CGFloat!    // starting height of the control
     var colourSwitch:UISwitch!  // switch to change the colour of the app
     var creditLabel:UILabel!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        indicator.image = UIImage(named: "inbox")
-        indicator.selectedImageTintColour = .black
-        indicator.tintColor = UIColor.orange
-        indicator.borderWidth = 2
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         // create the label in the center of the screen and the credit label in the bottom right hand corner
@@ -105,12 +90,10 @@ class ViewController: UIViewController, MagnificationPagingControlDelegate, Magn
         self.pagingControl.frame = frame
     }
     
-    
-    /**
-     Responds to the UISwitch changing its value
-     
-     - parameter sender: The switch whose value changed
-    */
+
+    /// Responds to the UISwitch changing its value
+    ///
+    /// - Parameter sender: The switch whose value changed
     @objc
     func switchChanged(sender:UISwitch) {
         var textColour = UIColor.black
@@ -124,44 +107,43 @@ class ViewController: UIViewController, MagnificationPagingControlDelegate, Magn
         self.creditLabel.textColor = textColour
     }
     
+    
     // MARK: - MagnificationPagingControlDelegate
+    
+    
     func touchDownInPageControl(point: CGPoint) {
         // animates the control inwards to be more dynamic and so the user's finger doesn't cover the control
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1,
                        options: [.beginFromCurrentState], animations: {() in
-                        
-//            let frame = CGRect(x: self.view.frame.width - self.startWidth*2, y: self.view.frame.height/2 - self.pagingControl.frame.height/2,
-//                               width: self.pagingControl.frame.width, height: self.pagingControl.frame.height)
-//            self.pagingControl.frame = frame
-                        self.pagingControl.transform = CGAffineTransform(translationX: -self.startWidth * 1.5, y: 0)
+            self.pagingControl.transform = CGAffineTransform(translationX: -self.startWidth * 1.5, y: 0)
         }, completion: nil)
             
     }
+    
     
     func touchFailedInPageControl() {
         animateControlBack()
     }
     
+    
     func touchEndedInPageControl() {
         animateControlBack()
     }
     
+    
     func touchCancelledInPageControl() {
         animateControlBack()
     }
+
     
-    /**
-     Moves the control back into its starting position
-     */
+    /// Moves the control back into its starting position
     func animateControlBack() {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1,
                        options: [.beginFromCurrentState], animations: {() in
-//            let frame = CGRect(x: self.view.frame.width - self.startWidth, y: self.view.frame.height/2 - self.pagingControl.frame.height/2,
-//                               width: self.pagingControl.frame.width, height: self.pagingControl.frame.height)
-//            self.pagingControl.frame = frame
             self.pagingControl.transform = .identity
         }, completion: nil)
     }
+    
     
     func pageControlChangedToIndex(index: Int) {
         label.text = "\(index)"
@@ -178,17 +160,6 @@ class ViewController: UIViewController, MagnificationPagingControlDelegate, Magn
             return (UIImage(named: "inbox"), UIColor.black)
         }
         return (nil, nil)
-    }
-    
-    
-    @IBAction func btnPressed(_ sender: Any) {
-        indicator.frame = CGRect(origin: indicator.frame.origin, size: CGSize(width: 50, height: 50))
-        indicator.isSelected = !indicator.isSelected
-        if indicator.image == nil {
-            indicator.image = UIImage(named: "inbox")
-        } else {
-            indicator.image = nil
-        }
     }
 }
 
