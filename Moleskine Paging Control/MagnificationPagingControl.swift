@@ -178,9 +178,10 @@ class MagnificationPagingControl: UIView {
     
     
     /// Defines the direction that the indicators should be laid out in
-    public var controlDirection: MagnificationPagingControlDirection = .horizontal {
+    public var controlDirection: MagnificationPagingControlDirection = .vertical {
         didSet {
-            
+            needsSetup = true
+            layoutSubviews()
         }
     }
     
@@ -254,11 +255,13 @@ class MagnificationPagingControl: UIView {
         indicators = []
 
         // changes the circle heights based on the distance from the dot
-        var runningHeight:CGFloat = padding
+        var runningPos:CGFloat = padding
 
         // make circles
         for i in 0 ..< numberOfPages {
-            let frame = CGRect(x: padding, y: runningHeight, width: indicatorDimension, height: indicatorDimension)
+            let x = (controlDirection == .vertical ? padding : runningPos)!
+            let y = (controlDirection == .vertical ? runningPos : padding)!
+            let frame = CGRect(x: x, y: y, width: indicatorDimension, height: indicatorDimension)
             let indicatorImageInfo = dataSource?.indicatorImage(for: i)
             let indicatorColour = dataSource?.colourForIndicator(at: i)
             
@@ -271,7 +274,7 @@ class MagnificationPagingControl: UIView {
                 indicator.isSelected = true
             }
 
-            runningHeight += padding + indicatorDimension
+            runningPos += padding + indicatorDimension
             addSubview(indicator)
             indicators.append(indicator)
         }
@@ -280,17 +283,29 @@ class MagnificationPagingControl: UIView {
     
     
     /// Resets the circles back to their default position, leaving the currently selected dot filled
-    func resetCircles() {
+    public func resetCircles() {
         if !needsSetup {
             // changes the circle heights based on the distance from the dot
-            var runningHeight:CGFloat = padding
+            var runningPos:CGFloat = padding
             for indicator in indicators {
-                let frame = CGRect(x: padding, y: runningHeight, width: indicatorDimension, height: indicatorDimension)
+                let x = (controlDirection == .vertical ? padding : runningPos)!
+                let y = (controlDirection == .vertical ? runningPos : padding)!
+                let frame = CGRect(x: x, y: y, width: indicatorDimension, height: indicatorDimension)
                 indicator.frame = frame
-                runningHeight += padding + indicatorDimension
+                runningPos += padding + indicatorDimension
             }
         }
         sizeToFit()
+    }
+    
+    
+    public func setTintForIndicator(at index:Int) {
+        
+    }
+    
+    
+    public func setImageForIndicator(at index:Int) {
+        
     }
 
 
@@ -349,16 +364,19 @@ class MagnificationPagingControl: UIView {
         currentPage = index
 
         // changes the indicator size based on the touch distance from the dot
-        var runningHeight:CGFloat = padding
+        var runningPos:CGFloat = padding
         let maxDistance = (indicatorDimension * 1.5) + padding
         for i in 0 ..< numberOfPages {
-            let distanceToCircle = min(abs((runningHeight + indicatorDimension/2) - point.y), maxDistance)
+            let pointDisplacement = controlDirection == .vertical ? point.y : point.x
+            let distanceToCircle = min(abs((runningPos + indicatorDimension/2) - pointDisplacement), maxDistance)
             let ratio = 1 + 2.5 * (1  - (distanceToCircle/maxDistance))  // the 2.5 will control the size of the dot when it grows
             let dimension = indicatorDimension * ratio
             let indicator = indicators[i]
-            let frame = CGRect(x: self.frame.width/2 - dimension/2, y: runningHeight, width: dimension, height: dimension)
+            let x = controlDirection == .vertical ? self.frame.width/2 - dimension/2 : runningPos
+            let y = controlDirection == .vertical ? runningPos : self.frame.width/2 - dimension/2
+            let frame = CGRect(x: x, y: y, width: dimension, height: dimension)
             indicator.frame = frame
-            runningHeight += padding + dimension
+            runningPos += padding + dimension
         }
         sizeToFit()
     }
